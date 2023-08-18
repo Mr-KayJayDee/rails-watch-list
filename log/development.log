@@ -1936,3 +1936,933 @@ FOREIGN KEY ("blob_id")
   [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
   [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5664623546625577800)[0m
   [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 127.0.0.1 at 2023-08-18 11:07:02 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ListsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering lists/index.html.erb within layouts/application
+  [1m[36mList Load (2.9ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/views/lists/index.html.erb:13
+  Rendered lists/index.html.erb within layouts/application (Duration: 59.0ms | Allocations: 5030)
+  Rendered shared/_navbar.html.erb (Duration: 0.6ms | Allocations: 422)
+  Rendered shared/_flashes.html.erb (Duration: 0.4ms | Allocations: 223)
+  Rendered layout layouts/application.html.erb (Duration: 71.7ms | Allocations: 7441)
+Completed 200 OK in 84ms (Views: 22.5ms | ActiveRecord: 51.0ms | Allocations: 14291)
+
+
+Started GET "/lists/1" for 127.0.0.1 at 2023-08-18 11:07:04 +0200
+Processing by ListsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mList Load (0.4ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:34:in `set_list'
+  Rendering layout layouts/application.html.erb
+  Rendering lists/show.html.erb within layouts/application
+  [1m[36mMovie Count (21.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "movies" INNER JOIN "bookmarks" ON "movies"."id" = "bookmarks"."movie_id" WHERE "bookmarks"."list_id" = $1[0m  [["list_id", 1]]
+  ↳ app/views/lists/show.html.erb:5
+  [1m[36mReview Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "reviews" WHERE "reviews"."list_id" = $1 LIMIT $2[0m  [["list_id", 1], ["LIMIT", 1]]
+  ↳ app/views/lists/show.html.erb:41
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."list_id" = $1[0m  [["list_id", 1]]
+  ↳ app/views/lists/show.html.erb:44
+  [1m[36mMovie Load (0.4ms)[0m  [1m[34mSELECT "movies".* FROM "movies" ORDER BY "movies"."title" ASC[0m
+  ↳ app/views/bookmarks/_modal.html.erb:12
+  Rendered bookmarks/_modal.html.erb (Duration: 4.9ms | Allocations: 6629)
+  Rendered lists/show.html.erb within layouts/application (Duration: 77.5ms | Allocations: 27561)
+  Rendered shared/_navbar.html.erb (Duration: 0.1ms | Allocations: 177)
+  Rendered shared/_flashes.html.erb (Duration: 0.0ms | Allocations: 31)
+  Rendered layout layouts/application.html.erb (Duration: 78.1ms | Allocations: 28245)
+Completed 200 OK in 132ms (Views: 33.6ms | ActiveRecord: 64.6ms | Allocations: 40131)
+
+
+Started GET "/" for 127.0.0.1 at 2023-08-18 11:07:07 +0200
+Processing by ListsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering lists/index.html.erb within layouts/application
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/views/lists/index.html.erb:13
+  Rendered lists/index.html.erb within layouts/application (Duration: 2.0ms | Allocations: 727)
+  Rendered shared/_navbar.html.erb (Duration: 0.2ms | Allocations: 173)
+  Rendered shared/_flashes.html.erb (Duration: 0.0ms | Allocations: 24)
+  Rendered layout layouts/application.html.erb (Duration: 3.5ms | Allocations: 1868)
+Completed 200 OK in 4ms (Views: 3.7ms | ActiveRecord: 0.3ms | Allocations: 2158)
+
+
+Started GET "/lists/new" for 127.0.0.1 at 2023-08-18 11:07:08 +0200
+Processing by ListsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering lists/new.html.erb within layouts/application
+  Rendered lists/new.html.erb within layouts/application (Duration: 10.7ms | Allocations: 3128)
+  Rendered shared/_navbar.html.erb (Duration: 0.2ms | Allocations: 185)
+  Rendered shared/_flashes.html.erb (Duration: 0.0ms | Allocations: 31)
+  Rendered layout layouts/application.html.erb (Duration: 11.9ms | Allocations: 3887)
+Completed 200 OK in 14ms (Views: 12.6ms | ActiveRecord: 0.0ms | Allocations: 4227)
+
+
+Started POST "/lists" for 127.0.0.1 at 2023-08-18 11:07:19 +0200
+Processing by ListsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "list"=>{"name"=>"", "photo"=>#<ActionDispatch::Http::UploadedFile:0x0000000118f45e70 @tempfile=#<Tempfile:/var/folders/n7/6h7pl_9j6xqgp7hgjjhp_2n00000gn/T/RackMultipart20230818-9483-2smis7.svg>, @content_type="image/svg+xml", @original_filename="OSZI-logo.svg", @headers="Content-Disposition: form-data; name=\"list[photo]\"; filename=\"OSZI-logo.svg\"\r\nContent-Type: image/svg+xml\r\n">}, "commit"=>"Create List"}
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.0ms | Allocations: 1740)
+
+
+  
+ActiveModel::UnknownAttributeError (unknown attribute 'photo' for List.
+
+          raise UnknownAttributeError.new(self, k.to_s)
+          ^^^^^):
+  
+app/controllers/lists_controller.rb:18:in `create'
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5664623546625577800)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(5664623546625577800)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/lists/new" for 127.0.0.1 at 2023-08-18 11:09:24 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ListsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering lists/new.html.erb within layouts/application
+  Rendered lists/new.html.erb within layouts/application (Duration: 21.8ms | Allocations: 13963)
+  Rendered shared/_navbar.html.erb (Duration: 0.4ms | Allocations: 452)
+  Rendered shared/_flashes.html.erb (Duration: 0.2ms | Allocations: 223)
+  Rendered layout layouts/application.html.erb (Duration: 23.3ms | Allocations: 15762)
+Completed 200 OK in 40ms (Views: 22.2ms | ActiveRecord: 6.7ms | Allocations: 27130)
+
+
+Started POST "/lists" for 127.0.0.1 at 2023-08-18 11:09:31 +0200
+Processing by ListsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "list"=>{"name"=>"Hey", "photo"=>#<ActionDispatch::Http::UploadedFile:0x0000000109085598 @tempfile=#<Tempfile:/var/folders/n7/6h7pl_9j6xqgp7hgjjhp_2n00000gn/T/RackMultipart20230818-9694-wnuh0t.png>, @content_type="image/png", @original_filename="Logo.png", @headers="Content-Disposition: form-data; name=\"list[photo]\"; filename=\"Logo.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Create List"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/lists_controller.rb:19:in `create'
+  [1m[36mList Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "lists" WHERE "lists"."name" = $1 LIMIT $2[0m  [["name", "Hey"], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:19:in `create'
+  [1m[36mList Create (3.2ms)[0m  [1m[32mINSERT INTO "lists" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Hey"], ["created_at", "2023-08-18 09:09:31.097646"], ["updated_at", "2023-08-18 09:09:31.097646"]]
+  ↳ app/controllers/lists_controller.rb:19:in `create'
+  [1m[36mActiveStorage::Blob Load (20.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" INNER JOIN "active_storage_attachments" ON "active_storage_blobs"."id" = "active_storage_attachments"."blob_id" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 2], ["record_type", "List"], ["name", "photo"], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:19:in `create'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 2], ["record_type", "List"], ["name", "photo"], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:19:in `create'
+  [1m[36mActiveStorage::Blob Create (1.0ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["key", "p78n3n0lneyot3y9sy693667uxur"], ["filename", "Logo.png"], ["content_type", "image/png"], ["metadata", "{\"identified\":true}"], ["service_name", "cloudinary"], ["byte_size", 193722], ["checksum", "QUJRGCt8mM5TJXltLkd69A=="], ["created_at", "2023-08-18 09:09:31.137794"]]
+  ↳ app/controllers/lists_controller.rb:19:in `create'
+  [1m[36mActiveStorage::Attachment Create (1.8ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "photo"], ["record_type", "List"], ["record_id", 2], ["blob_id", 1], ["created_at", "2023-08-18 09:09:31.139742"]]
+  ↳ app/controllers/lists_controller.rb:19:in `create'
+  [1m[36mList Update (3.2ms)[0m  [1m[33mUPDATE "lists" SET "updated_at" = $1 WHERE "lists"."id" = $2[0m  [["updated_at", "2023-08-18 09:09:31.142151"], ["id", 2]]
+  ↳ app/controllers/lists_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/lists_controller.rb:19:in `create'
+[36m  Cloudinary Storage (1328.2ms) [0m[32mUploaded file to key: p78n3n0lneyot3y9sy693667uxur (checksum: QUJRGCt8mM5TJXltLkd69A==)[0m
+[ActiveJob] Enqueued ActiveStorage::AnalyzeJob (Job ID: 8d339b51-631c-4f76-ad6b-f5e225da5296) to Async(default) with arguments: #<GlobalID:0x0000000109a37f00 @uri=#<URI::GID gid://rails-watch-list/ActiveStorage::Blob/1>>
+Redirected to http://127.0.0.1:3000/lists/2
+Completed 302 Found in 1455ms (ActiveRecord: 39.0ms | Allocations: 192499)
+
+
+[ActiveJob] [ActiveStorage::AnalyzeJob] [8d339b51-631c-4f76-ad6b-f5e225da5296]   [1m[36mActiveStorage::Blob Load (0.5ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [8d339b51-631c-4f76-ad6b-f5e225da5296] Performing ActiveStorage::AnalyzeJob (Job ID: 8d339b51-631c-4f76-ad6b-f5e225da5296) from Async(default) enqueued at 2023-08-18T09:09:32Z with arguments: #<GlobalID:0x0000000109a54c90 @uri=#<URI::GID gid://rails-watch-list/ActiveStorage::Blob/1>>
+[ActiveJob] [ActiveStorage::AnalyzeJob] [8d339b51-631c-4f76-ad6b-f5e225da5296] Skipping image analysis because the ruby-vips gem isn't installed
+[ActiveJob] [ActiveStorage::AnalyzeJob] [8d339b51-631c-4f76-ad6b-f5e225da5296]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+Started GET "/lists/2" for 127.0.0.1 at 2023-08-18 11:09:32 +0200
+Processing by ListsController#show as TURBO_STREAM
+  Parameters: {"id"=>"2"}
+[ActiveJob] [ActiveStorage::AnalyzeJob] [8d339b51-631c-4f76-ad6b-f5e225da5296]   [1m[36mActiveStorage::Blob Update (11.7ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = $1 WHERE "active_storage_blobs"."id" = $2[0m  [["metadata", "{\"identified\":true,\"analyzed\":true}"], ["id", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [8d339b51-631c-4f76-ad6b-f5e225da5296]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [8d339b51-631c-4f76-ad6b-f5e225da5296] Performed ActiveStorage::AnalyzeJob (Job ID: 8d339b51-631c-4f76-ad6b-f5e225da5296) from Async(default) in 33.1ms
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:34:in `set_list'
+  Rendering layout layouts/application.html.erb
+  Rendering lists/show.html.erb within layouts/application
+  [1m[36mMovie Count (1.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "movies" INNER JOIN "bookmarks" ON "movies"."id" = "bookmarks"."movie_id" WHERE "bookmarks"."list_id" = $1[0m  [["list_id", 2]]
+  ↳ app/views/lists/show.html.erb:5
+  [1m[36mReview Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "reviews" WHERE "reviews"."list_id" = $1 LIMIT $2[0m  [["list_id", 2], ["LIMIT", 1]]
+  ↳ app/views/lists/show.html.erb:41
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."list_id" = $1[0m  [["list_id", 2]]
+  ↳ app/views/lists/show.html.erb:44
+  [1m[36mMovie Load (0.9ms)[0m  [1m[34mSELECT "movies".* FROM "movies" ORDER BY "movies"."title" ASC[0m
+  ↳ app/views/bookmarks/_modal.html.erb:12
+  Rendered bookmarks/_modal.html.erb (Duration: 12.4ms | Allocations: 6577)
+  Rendered lists/show.html.erb within layouts/application (Duration: 30.4ms | Allocations: 19129)
+  Rendered shared/_navbar.html.erb (Duration: 0.1ms | Allocations: 177)
+  Rendered shared/_flashes.html.erb (Duration: 0.0ms | Allocations: 31)
+  Rendered layout layouts/application.html.erb (Duration: 30.9ms | Allocations: 19810)
+Completed 200 OK in 67ms (Views: 25.2ms | ActiveRecord: 21.5ms | Allocations: 34372)
+
+
+Started GET "/lists/2" for 127.0.0.1 at 2023-08-18 11:10:31 +0200
+Processing by ListsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mList Load (4.2ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:34:in `set_list'
+  Rendering layout layouts/application.html.erb
+  Rendering lists/show.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (1.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 2], ["record_type", "List"], ["name", "photo"], ["LIMIT", 1]]
+  ↳ app/views/lists/show.html.erb:2
+  [1m[36mActiveStorage::Blob Load (0.8ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/lists/show.html.erb:2
+  [1m[36mMovie Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "movies" INNER JOIN "bookmarks" ON "movies"."id" = "bookmarks"."movie_id" WHERE "bookmarks"."list_id" = $1[0m  [["list_id", 2]]
+  ↳ app/views/lists/show.html.erb:5
+  [1m[36mReview Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "reviews" WHERE "reviews"."list_id" = $1 LIMIT $2[0m  [["list_id", 2], ["LIMIT", 1]]
+  ↳ app/views/lists/show.html.erb:41
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."list_id" = $1[0m  [["list_id", 2]]
+  ↳ app/views/lists/show.html.erb:44
+  [1m[36mMovie Load (0.5ms)[0m  [1m[34mSELECT "movies".* FROM "movies" ORDER BY "movies"."title" ASC[0m
+  ↳ app/views/bookmarks/_modal.html.erb:12
+  Rendered bookmarks/_modal.html.erb (Duration: 4.2ms | Allocations: 3202)
+  Rendered lists/show.html.erb within layouts/application (Duration: 35.7ms | Allocations: 11644)
+  Rendered shared/_navbar.html.erb (Duration: 0.5ms | Allocations: 396)
+  Rendered shared/_flashes.html.erb (Duration: 0.3ms | Allocations: 205)
+  Rendered layout layouts/application.html.erb (Duration: 38.6ms | Allocations: 13135)
+Completed 200 OK in 69ms (Views: 39.5ms | ActiveRecord: 8.2ms | Allocations: 14613)
+
+
+Started GET "/lists/2" for 127.0.0.1 at 2023-08-18 11:10:33 +0200
+Processing by ListsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mList Load (0.8ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:34:in `set_list'
+  Rendering layout layouts/application.html.erb
+  Rendering lists/show.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 2], ["record_type", "List"], ["name", "photo"], ["LIMIT", 1]]
+  ↳ app/views/lists/show.html.erb:2
+  [1m[36mActiveStorage::Blob Load (11.6ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/lists/show.html.erb:2
+  [1m[36mMovie Count (2.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "movies" INNER JOIN "bookmarks" ON "movies"."id" = "bookmarks"."movie_id" WHERE "bookmarks"."list_id" = $1[0m  [["list_id", 2]]
+  ↳ app/views/lists/show.html.erb:5
+  [1m[36mReview Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "reviews" WHERE "reviews"."list_id" = $1 LIMIT $2[0m  [["list_id", 2], ["LIMIT", 1]]
+  ↳ app/views/lists/show.html.erb:41
+  [1m[36mReview Load (0.5ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."list_id" = $1[0m  [["list_id", 2]]
+  ↳ app/views/lists/show.html.erb:44
+  [1m[36mMovie Load (0.6ms)[0m  [1m[34mSELECT "movies".* FROM "movies" ORDER BY "movies"."title" ASC[0m
+  ↳ app/views/bookmarks/_modal.html.erb:12
+  Rendered bookmarks/_modal.html.erb (Duration: 4.0ms | Allocations: 2955)
+  Rendered lists/show.html.erb within layouts/application (Duration: 46.0ms | Allocations: 9134)
+  Rendered shared/_navbar.html.erb (Duration: 0.1ms | Allocations: 172)
+  Rendered shared/_flashes.html.erb (Duration: 0.0ms | Allocations: 24)
+  Rendered layout layouts/application.html.erb (Duration: 46.9ms | Allocations: 9807)
+Completed 200 OK in 55ms (Views: 31.8ms | ActiveRecord: 16.8ms | Allocations: 10614)
+
+
+Started GET "/lists/2" for 127.0.0.1 at 2023-08-18 11:10:34 +0200
+Processing by ListsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mList Load (0.7ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:34:in `set_list'
+  Rendering layout layouts/application.html.erb
+  Rendering lists/show.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 2], ["record_type", "List"], ["name", "photo"], ["LIMIT", 1]]
+  ↳ app/views/lists/show.html.erb:2
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/lists/show.html.erb:2
+  [1m[36mMovie Count (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "movies" INNER JOIN "bookmarks" ON "movies"."id" = "bookmarks"."movie_id" WHERE "bookmarks"."list_id" = $1[0m  [["list_id", 2]]
+  ↳ app/views/lists/show.html.erb:5
+  [1m[36mReview Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "reviews" WHERE "reviews"."list_id" = $1 LIMIT $2[0m  [["list_id", 2], ["LIMIT", 1]]
+  ↳ app/views/lists/show.html.erb:41
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."list_id" = $1[0m  [["list_id", 2]]
+  ↳ app/views/lists/show.html.erb:44
+  [1m[36mMovie Load (0.3ms)[0m  [1m[34mSELECT "movies".* FROM "movies" ORDER BY "movies"."title" ASC[0m
+  ↳ app/views/bookmarks/_modal.html.erb:12
+  Rendered bookmarks/_modal.html.erb (Duration: 2.9ms | Allocations: 2955)
+  Rendered lists/show.html.erb within layouts/application (Duration: 23.2ms | Allocations: 9120)
+  Rendered shared/_navbar.html.erb (Duration: 0.1ms | Allocations: 172)
+  Rendered shared/_flashes.html.erb (Duration: 0.0ms | Allocations: 24)
+  Rendered layout layouts/application.html.erb (Duration: 23.9ms | Allocations: 9794)
+Completed 200 OK in 52ms (Views: 22.0ms | ActiveRecord: 3.4ms | Allocations: 10585)
+
+
+Started GET "/" for 127.0.0.1 at 2023-08-18 11:10:36 +0200
+Processing by ListsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering lists/index.html.erb within layouts/application
+  [1m[36mList Load (0.7ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/views/lists/index.html.erb:13
+  Rendered lists/index.html.erb within layouts/application (Duration: 19.8ms | Allocations: 1052)
+  Rendered shared/_navbar.html.erb (Duration: 0.1ms | Allocations: 173)
+  Rendered shared/_flashes.html.erb (Duration: 0.1ms | Allocations: 24)
+  Rendered layout layouts/application.html.erb (Duration: 21.9ms | Allocations: 2187)
+Completed 200 OK in 25ms (Views: 22.1ms | ActiveRecord: 0.7ms | Allocations: 2493)
+
+
+Started GET "/" for 127.0.0.1 at 2023-08-18 11:10:37 +0200
+Processing by ListsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering lists/index.html.erb within layouts/application
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/views/lists/index.html.erb:13
+  Rendered lists/index.html.erb within layouts/application (Duration: 1.7ms | Allocations: 785)
+  Rendered shared/_navbar.html.erb (Duration: 1.0ms | Allocations: 173)
+  Rendered shared/_flashes.html.erb (Duration: 0.0ms | Allocations: 24)
+  Rendered layout layouts/application.html.erb (Duration: 3.3ms | Allocations: 1909)
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 0.3ms | Allocations: 2164)
+
+
+Started GET "/" for 127.0.0.1 at 2023-08-18 11:11:00 +0200
+Processing by ListsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering lists/index.html.erb within layouts/application
+  [1m[36mList Load (1.0ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/views/lists/index.html.erb:13
+  Rendered lists/index.html.erb within layouts/application (Duration: 23.9ms | Allocations: 5953)
+  Rendered layout layouts/application.html.erb (Duration: 24.1ms | Allocations: 6050)
+Completed 500 Internal Server Error in 48ms (ActiveRecord: 1.0ms | Allocations: 6915)
+
+
+  
+ActionView::Template::Error (undefined method `photo' for nil:NilClass
+
+          <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('.freeze;@output_buffer.append=( cl_image_path @list.photo.key, height: 300, crop: :fill );@output_buffer.safe_append=')">
+                                                                                                                                                                                            ^^^^^^):
+    13:     <% @lists.each do |list| %>
+    14:       <div class="co-12 col-sm-6 col-md-4 mb-3">
+    15:         <%= link_to list_path(list), class:"text-decoration-none" do %>
+    16:           <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= cl_image_path @list.photo.key, height: 300, crop: :fill %>)">
+    17:             <%= list.name %>
+    18:           </div>
+    19:         <% end %>
+  
+app/views/lists/index.html.erb:16
+app/views/lists/index.html.erb:15
+app/views/lists/index.html.erb:13
+Started GET "/" for 127.0.0.1 at 2023-08-18 11:11:13 +0200
+Processing by ListsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering lists/index.html.erb within layouts/application
+  [1m[36mList Load (0.7ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/views/lists/index.html.erb:13
+  Rendered lists/index.html.erb within layouts/application (Duration: 23.9ms | Allocations: 2730)
+  Rendered layout layouts/application.html.erb (Duration: 24.2ms | Allocations: 2809)
+Completed 500 Internal Server Error in 28ms (ActiveRecord: 0.7ms | Allocations: 3068)
+
+
+  
+ActionView::Template::Error (undefined method `photo' for nil:NilClass
+
+          <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('.freeze;@output_buffer.append=( cl_image_path @list.photo.key, height: 300, crop: :fill );@output_buffer.safe_append=')">
+                                                                                                                                                                                            ^^^^^^):
+    13:     <% @lists.each do |list| %>
+    14:       <div class="co-12 col-sm-6 col-md-4 mb-3">
+    15:         <%= link_to list_path(list), class:"text-decoration-none" do %>
+    16:           <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= cl_image_path @list.photo.key, height: 300, crop: :fill %>)">
+    17:             <%= list.name %>
+    18:           </div>
+    19:         <% end %>
+  
+app/views/lists/index.html.erb:16
+app/views/lists/index.html.erb:15
+app/views/lists/index.html.erb:13
+Started GET "/" for 127.0.0.1 at 2023-08-18 11:11:15 +0200
+Processing by ListsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering lists/index.html.erb within layouts/application
+  [1m[36mList Load (0.9ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/views/lists/index.html.erb:13
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "List"], ["name", "photo"], ["LIMIT", 1]]
+  ↳ app/views/lists/index.html.erb:16
+  Rendered lists/index.html.erb within layouts/application (Duration: 25.0ms | Allocations: 3461)
+  Rendered layout layouts/application.html.erb (Duration: 25.1ms | Allocations: 3546)
+Completed 500 Internal Server Error in 31ms (ActiveRecord: 1.2ms | Allocations: 4382)
+
+
+  
+ActionView::Template::Error (no implicit conversion of nil into String):
+    13:     <% @lists.each do |list| %>
+    14:       <div class="co-12 col-sm-6 col-md-4 mb-3">
+    15:         <%= link_to list_path(list), class:"text-decoration-none" do %>
+    16:           <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= cl_image_path list.photo.key, height: 300, crop: :fill %>)">
+    17:             <%= list.name %>
+    18:           </div>
+    19:         <% end %>
+  
+app/views/lists/index.html.erb:16
+app/views/lists/index.html.erb:15
+app/views/lists/index.html.erb:13
+Started GET "/" for 127.0.0.1 at 2023-08-18 11:11:16 +0200
+Processing by ListsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering lists/index.html.erb within layouts/application
+  [1m[36mList Load (0.6ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/views/lists/index.html.erb:13
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "List"], ["name", "photo"], ["LIMIT", 1]]
+  ↳ app/views/lists/index.html.erb:16
+  Rendered lists/index.html.erb within layouts/application (Duration: 13.1ms | Allocations: 2921)
+  Rendered layout layouts/application.html.erb (Duration: 14.5ms | Allocations: 3000)
+Completed 500 Internal Server Error in 17ms (ActiveRecord: 0.9ms | Allocations: 3241)
+
+
+  
+ActionView::Template::Error (no implicit conversion of nil into String):
+    13:     <% @lists.each do |list| %>
+    14:       <div class="co-12 col-sm-6 col-md-4 mb-3">
+    15:         <%= link_to list_path(list), class:"text-decoration-none" do %>
+    16:           <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= cl_image_path list.photo.key, height: 300, crop: :fill %>)">
+    17:             <%= list.name %>
+    18:           </div>
+    19:         <% end %>
+  
+app/views/lists/index.html.erb:16
+app/views/lists/index.html.erb:15
+app/views/lists/index.html.erb:13
+Started GET "/" for 127.0.0.1 at 2023-08-18 11:11:17 +0200
+Processing by ListsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering lists/index.html.erb within layouts/application
+  [1m[36mList Load (0.7ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/views/lists/index.html.erb:13
+  [1m[36mActiveStorage::Attachment Load (0.6ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "List"], ["name", "photo"], ["LIMIT", 1]]
+  ↳ app/views/lists/index.html.erb:16
+  Rendered lists/index.html.erb within layouts/application (Duration: 26.3ms | Allocations: 2918)
+  Rendered layout layouts/application.html.erb (Duration: 26.5ms | Allocations: 2997)
+Completed 500 Internal Server Error in 31ms (ActiveRecord: 1.3ms | Allocations: 3220)
+
+
+  
+ActionView::Template::Error (no implicit conversion of nil into String):
+    13:     <% @lists.each do |list| %>
+    14:       <div class="co-12 col-sm-6 col-md-4 mb-3">
+    15:         <%= link_to list_path(list), class:"text-decoration-none" do %>
+    16:           <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= cl_image_path list.photo.key, height: 300, crop: :fill %>)">
+    17:             <%= list.name %>
+    18:           </div>
+    19:         <% end %>
+  
+app/views/lists/index.html.erb:16
+app/views/lists/index.html.erb:15
+app/views/lists/index.html.erb:13
+Started GET "/" for 127.0.0.1 at 2023-08-18 11:11:29 +0200
+Processing by ListsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering lists/index.html.erb within layouts/application
+  [1m[36mList Load (0.6ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/views/lists/index.html.erb:13
+  Rendered lists/index.html.erb within layouts/application (Duration: 5.3ms | Allocations: 1251)
+  Rendered shared/_navbar.html.erb (Duration: 0.8ms | Allocations: 396)
+  Rendered shared/_flashes.html.erb (Duration: 0.4ms | Allocations: 206)
+  Rendered layout layouts/application.html.erb (Duration: 10.8ms | Allocations: 3250)
+Completed 200 OK in 18ms (Views: 14.0ms | ActiveRecord: 0.6ms | Allocations: 4113)
+
+
+Started GET "/lists/2" for 127.0.0.1 at 2023-08-18 11:11:30 +0200
+Processing by ListsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mList Load (1.5ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:34:in `set_list'
+  Rendering layout layouts/application.html.erb
+  Rendering lists/show.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 2], ["record_type", "List"], ["name", "photo"], ["LIMIT", 1]]
+  ↳ app/views/lists/show.html.erb:2
+  [1m[36mActiveStorage::Blob Load (0.6ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/lists/show.html.erb:2
+  [1m[36mMovie Count (1.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "movies" INNER JOIN "bookmarks" ON "movies"."id" = "bookmarks"."movie_id" WHERE "bookmarks"."list_id" = $1[0m  [["list_id", 2]]
+  ↳ app/views/lists/show.html.erb:5
+  [1m[36mReview Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "reviews" WHERE "reviews"."list_id" = $1 LIMIT $2[0m  [["list_id", 2], ["LIMIT", 1]]
+  ↳ app/views/lists/show.html.erb:41
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."list_id" = $1[0m  [["list_id", 2]]
+  ↳ app/views/lists/show.html.erb:44
+  [1m[36mMovie Load (0.4ms)[0m  [1m[34mSELECT "movies".* FROM "movies" ORDER BY "movies"."title" ASC[0m
+  ↳ app/views/bookmarks/_modal.html.erb:12
+  Rendered bookmarks/_modal.html.erb (Duration: 3.7ms | Allocations: 3200)
+  Rendered lists/show.html.erb within layouts/application (Duration: 28.0ms | Allocations: 10392)
+  Rendered shared/_navbar.html.erb (Duration: 0.1ms | Allocations: 172)
+  Rendered shared/_flashes.html.erb (Duration: 0.0ms | Allocations: 24)
+  Rendered layout layouts/application.html.erb (Duration: 28.7ms | Allocations: 11065)
+Completed 200 OK in 51ms (Views: 24.8ms | ActiveRecord: 5.9ms | Allocations: 11947)
+
+
+Started DELETE "/lists/2" for 127.0.0.1 at 2023-08-18 11:11:32 +0200
+Processing by ListsController#destroy as TURBO_STREAM
+  Parameters: {"id"=>"2"}
+  [1m[36mList Load (0.6ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:34:in `set_list'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/lists_controller.rb:27:in `destroy'
+  [1m[36mBookmark Load (0.3ms)[0m  [1m[34mSELECT "bookmarks".* FROM "bookmarks" WHERE "bookmarks"."list_id" = $1[0m  [["list_id", 2]]
+  ↳ app/controllers/lists_controller.rb:27:in `destroy'
+  [1m[36mMovie Load (0.3ms)[0m  [1m[34mSELECT "movies".* FROM "movies" INNER JOIN "bookmarks" ON "movies"."id" = "bookmarks"."movie_id" WHERE "bookmarks"."list_id" = $1[0m  [["list_id", 2]]
+  ↳ app/controllers/lists_controller.rb:27:in `destroy'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."list_id" = $1[0m  [["list_id", 2]]
+  ↳ app/controllers/lists_controller.rb:27:in `destroy'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 2], ["record_type", "List"], ["name", "photo"], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:27:in `destroy'
+  [1m[36mActiveStorage::Attachment Destroy (1.3ms)[0m  [1m[31mDELETE FROM "active_storage_attachments" WHERE "active_storage_attachments"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/lists_controller.rb:27:in `destroy'
+  [1m[36mList Destroy (0.7ms)[0m  [1m[31mDELETE FROM "lists" WHERE "lists"."id" = $1[0m  [["id", 2]]
+  ↳ app/controllers/lists_controller.rb:27:in `destroy'
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/lists_controller.rb:27:in `destroy'
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:27:in `destroy'
+[ActiveJob] Enqueued ActiveStorage::PurgeJob (Job ID: 95aeeb15-5f66-4557-aeda-bf0dd580f37d) to Async(default) with arguments: #<GlobalID:0x0000000107e01a98 @uri=#<URI::GID gid://rails-watch-list/ActiveStorage::Blob/1>>
+Redirected to http://127.0.0.1:3000/lists
+Completed 303 See Other in 49ms (ActiveRecord: 5.2ms | Allocations: 12513)
+
+
+Started GET "/lists" for 127.0.0.1 at 2023-08-18 11:11:32 +0200
+[ActiveJob] [ActiveStorage::PurgeJob] [95aeeb15-5f66-4557-aeda-bf0dd580f37d]   [1m[36mActiveStorage::Blob Load (1.0ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::PurgeJob] [95aeeb15-5f66-4557-aeda-bf0dd580f37d] Performing ActiveStorage::PurgeJob (Job ID: 95aeeb15-5f66-4557-aeda-bf0dd580f37d) from Async(default) enqueued at 2023-08-18T09:11:32Z with arguments: #<GlobalID:0x000000010805daf8 @uri=#<URI::GID gid://rails-watch-list/ActiveStorage::Blob/1>>
+Processing by ListsController#index as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering lists/index.html.erb within layouts/application
+[ActiveJob] [ActiveStorage::PurgeJob] [95aeeb15-5f66-4557-aeda-bf0dd580f37d]   [1m[36mTRANSACTION (3.7ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [ActiveStorage::PurgeJob] [95aeeb15-5f66-4557-aeda-bf0dd580f37d]   [1m[36mActiveStorage::Attachment Exists? (8.8ms)[0m  [1m[34mSELECT 1 AS one FROM "active_storage_attachments" WHERE "active_storage_attachments"."blob_id" = $1 LIMIT $2[0m  [["blob_id", 1], ["LIMIT", 1]]
+  [1m[36mList Load (2.7ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/views/lists/index.html.erb:13
+  Rendered lists/index.html.erb within layouts/application (Duration: 18.9ms | Allocations: 3405)
+  Rendered shared/_navbar.html.erb (Duration: 0.1ms | Allocations: 176)
+  Rendered shared/_flashes.html.erb (Duration: 0.0ms | Allocations: 31)
+  Rendered layout layouts/application.html.erb (Duration: 20.0ms | Allocations: 4771)
+Completed 200 OK in 20ms (Views: 17.6ms | ActiveRecord: 2.7ms | Allocations: 5160)
+
+
+[ActiveJob] [ActiveStorage::PurgeJob] [95aeeb15-5f66-4557-aeda-bf0dd580f37d]   [1m[36mActiveStorage::VariantRecord Load (15.5ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."blob_id" = $1[0m  [["blob_id", 1]]
+[ActiveJob] [ActiveStorage::PurgeJob] [95aeeb15-5f66-4557-aeda-bf0dd580f37d]   [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "ActiveStorage::Blob"], ["name", "preview_image"], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::PurgeJob] [95aeeb15-5f66-4557-aeda-bf0dd580f37d]   [1m[36mActiveStorage::Blob Destroy (0.7ms)[0m  [1m[31mDELETE FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1[0m  [["id", 1]]
+[ActiveJob] [ActiveStorage::PurgeJob] [95aeeb15-5f66-4557-aeda-bf0dd580f37d]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/lists/1" for 127.0.0.1 at 2023-08-18 11:11:33 +0200
+Processing by ListsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mList Load (3.0ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:34:in `set_list'
+  Rendering layout layouts/application.html.erb
+  Rendering lists/show.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "List"], ["name", "photo"], ["LIMIT", 1]]
+  ↳ app/views/lists/show.html.erb:2
+  Rendered lists/show.html.erb within layouts/application (Duration: 5.7ms | Allocations: 2206)
+  Rendered layout layouts/application.html.erb (Duration: 6.0ms | Allocations: 2286)
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 3.5ms | Allocations: 3090)
+
+
+  
+ActionView::Template::Error (no implicit conversion of nil into String):
+    1: <div class="position-relative">
+    2:   <div class="card-category card-large" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= cl_image_path @list.photo.key, height: 300, crop: :fill %>)">
+    3:     <h1><%= @list.name %></h1>
+    4:   </div>
+    5:   <span class="movie-tag"><%= pluralize(@list.movies.size, "movie") %></span>
+  
+app/views/lists/show.html.erb:2
+[ActiveJob] [ActiveStorage::PurgeJob] [95aeeb15-5f66-4557-aeda-bf0dd580f37d] [36m  Cloudinary Storage (683.8ms) [0m[31mDeleted file from key: p78n3n0lneyot3y9sy693667uxur[0m
+[ActiveJob] [ActiveStorage::PurgeJob] [95aeeb15-5f66-4557-aeda-bf0dd580f37d] Performed ActiveStorage::PurgeJob (Job ID: 95aeeb15-5f66-4557-aeda-bf0dd580f37d) from Async(default) in 735.95ms
+Started GET "/lists" for 127.0.0.1 at 2023-08-18 11:11:35 +0200
+Processing by ListsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering lists/index.html.erb within layouts/application
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/views/lists/index.html.erb:13
+  Rendered lists/index.html.erb within layouts/application (Duration: 2.1ms | Allocations: 706)
+  Rendered shared/_navbar.html.erb (Duration: 0.4ms | Allocations: 173)
+  Rendered shared/_flashes.html.erb (Duration: 0.1ms | Allocations: 24)
+  Rendered layout layouts/application.html.erb (Duration: 4.4ms | Allocations: 1844)
+Completed 200 OK in 5ms (Views: 4.6ms | ActiveRecord: 0.3ms | Allocations: 2093)
+
+
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (68.0ms)[0m  [1m[35mDROP DATABASE IF EXISTS "rails-watch-list_development"[0m
+  [1m[35m (29.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "rails-watch-list_test"[0m
+  [1m[35m (204.2ms)[0m  [1m[35mCREATE DATABASE "rails-watch-list_development" ENCODING = 'unicode'[0m
+  [1m[35m (63.0ms)[0m  [1m[35mCREATE DATABASE "rails-watch-list_test" ENCODING = 'unicode'[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5664623546625577800)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateMovies (20220421072200)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE TABLE "movies" ("id" bigserial primary key, "title" character varying, "overview" text, "poster_url" character varying, "rating" float, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220421072200"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateLists (20220421072341)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "lists" ("id" bigserial primary key, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220421072341"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBookmarks (20220421072643)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.4ms)[0m  [1m[35mCREATE TABLE "bookmarks" ("id" bigserial primary key, "comment" text, "movie_id" bigint NOT NULL, "list_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_630f44bd39"
+FOREIGN KEY ("movie_id")
+  REFERENCES "movies" ("id")
+, CONSTRAINT "fk_rails_29c05dc16c"
+FOREIGN KEY ("list_id")
+  REFERENCES "lists" ("id")
+)[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE INDEX "index_bookmarks_on_movie_id" ON "bookmarks" ("movie_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_bookmarks_on_list_id" ON "bookmarks" ("list_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220421072643"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateReviews (20220421075255)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "reviews" ("id" bigserial primary key, "comment" text, "rating" integer, "list_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_4a5c24a6bd"
+FOREIGN KEY ("list_id")
+  REFERENCES "lists" ("id")
+)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_reviews_on_list_id" ON "reviews" ("list_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220421075255"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateActiveStorageTables (20230818064859)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "active_storage_blobs" ("id" bigserial primary key, "key" character varying NOT NULL, "filename" character varying NOT NULL, "content_type" character varying, "metadata" text, "service_name" character varying NOT NULL, "byte_size" bigint NOT NULL, "checksum" character varying, "created_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_blobs_on_key" ON "active_storage_blobs" ("key")[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" bigserial primary key, "name" character varying NOT NULL, "record_type" character varying NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_c3b3935057"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments" ("blob_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_attachments_uniqueness" ON "active_storage_attachments" ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE TABLE "active_storage_variant_records" ("id" bigserial primary key, "blob_id" bigint NOT NULL, "variation_digest" character varying NOT NULL, CONSTRAINT "fk_rails_993965df05"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_variant_records_uniqueness" ON "active_storage_variant_records" ("blob_id", "variation_digest")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230818064859"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2023-08-18 09:12:01.985351"], ["updated_at", "2023-08-18 09:12:01.985351"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT pg_advisory_unlock(5664623546625577800)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/lists" for 127.0.0.1 at 2023-08-18 11:12:08 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ListsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering lists/index.html.erb within layouts/application
+  [1m[36mList Load (2.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/views/lists/index.html.erb:13
+  Rendered lists/index.html.erb within layouts/application (Duration: 3.6ms | Allocations: 1469)
+  Rendered shared/_navbar.html.erb (Duration: 0.6ms | Allocations: 443)
+  Rendered shared/_flashes.html.erb (Duration: 0.2ms | Allocations: 223)
+  Rendered layout layouts/application.html.erb (Duration: 7.0ms | Allocations: 3961)
+Completed 200 OK in 17ms (Views: 6.3ms | ActiveRecord: 2.3ms | Allocations: 11862)
+
+
+Started GET "/lists/new" for 127.0.0.1 at 2023-08-18 11:12:10 +0200
+Processing by ListsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering lists/new.html.erb within layouts/application
+  Rendered lists/new.html.erb within layouts/application (Duration: 36.9ms | Allocations: 13081)
+  Rendered shared/_navbar.html.erb (Duration: 0.1ms | Allocations: 185)
+  Rendered shared/_flashes.html.erb (Duration: 0.0ms | Allocations: 31)
+  Rendered layout layouts/application.html.erb (Duration: 37.7ms | Allocations: 13846)
+Completed 200 OK in 103ms (Views: 24.8ms | ActiveRecord: 19.8ms | Allocations: 17572)
+
+
+Started POST "/lists" for 127.0.0.1 at 2023-08-18 11:12:12 +0200
+Processing by ListsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "list"=>{"name"=>"Test"}, "commit"=>"Create List"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/lists_controller.rb:19:in `create'
+  [1m[36mList Exists? (12.7ms)[0m  [1m[34mSELECT 1 AS one FROM "lists" WHERE "lists"."name" = $1 LIMIT $2[0m  [["name", "Test"], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:19:in `create'
+  [1m[36mList Create (1.6ms)[0m  [1m[32mINSERT INTO "lists" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Test"], ["created_at", "2023-08-18 09:12:12.866115"], ["updated_at", "2023-08-18 09:12:12.866115"]]
+  ↳ app/controllers/lists_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/lists_controller.rb:19:in `create'
+Redirected to http://127.0.0.1:3000/lists/1
+Completed 302 Found in 27ms (ActiveRecord: 14.8ms | Allocations: 6501)
+
+
+Started GET "/lists/1" for 127.0.0.1 at 2023-08-18 11:12:12 +0200
+Processing by ListsController#show as TURBO_STREAM
+  Parameters: {"id"=>"1"}
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:34:in `set_list'
+  Rendering layout layouts/application.html.erb
+  Rendering lists/show.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (1.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "List"], ["name", "photo"], ["LIMIT", 1]]
+  ↳ app/views/lists/show.html.erb:2
+  Rendered lists/show.html.erb within layouts/application (Duration: 11.3ms | Allocations: 5560)
+  Rendered layout layouts/application.html.erb (Duration: 11.4ms | Allocations: 5657)
+Completed 500 Internal Server Error in 32ms (ActiveRecord: 11.9ms | Allocations: 15686)
+
+
+  
+ActionView::Template::Error (nil is not a valid asset source):
+    1: <div class="position-relative">
+    2:   <div class="card-category card-large" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= cl_image_path @list.photo.key, height: 300, crop: :fill %>)">
+    3:     <h1><%= @list.name %></h1>
+    4:   </div>
+    5:   <span class="movie-tag"><%= pluralize(@list.movies.size, "movie") %></span>
+  
+app/views/lists/show.html.erb:2
+Started GET "/lists" for 127.0.0.1 at 2023-08-18 11:12:14 +0200
+Processing by ListsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering lists/index.html.erb within layouts/application
+  [1m[36mList Load (0.5ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/views/lists/index.html.erb:13
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "List"], ["name", "photo"], ["LIMIT", 1]]
+  ↳ app/views/lists/index.html.erb:16
+  Rendered lists/index.html.erb within layouts/application (Duration: 20.0ms | Allocations: 3196)
+  Rendered layout layouts/application.html.erb (Duration: 20.2ms | Allocations: 3276)
+Completed 500 Internal Server Error in 21ms (ActiveRecord: 0.7ms | Allocations: 3541)
+
+
+  
+ActionView::Template::Error (nil is not a valid asset source):
+    13:     <% @lists.each do |list| %>
+    14:       <div class="co-12 col-sm-6 col-md-4 mb-3">
+    15:         <%= link_to list_path(list), class:"text-decoration-none" do %>
+    16:           <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= cl_image_path list.photo.key, height: 300, crop: :fill %>)">
+    17:             <%= list.name %>
+    18:           </div>
+    19:         <% end %>
+  
+app/views/lists/index.html.erb:16
+app/views/lists/index.html.erb:15
+app/views/lists/index.html.erb:13
+Started GET "/lists" for 127.0.0.1 at 2023-08-18 11:12:15 +0200
+Processing by ListsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering lists/index.html.erb within layouts/application
+  [1m[36mList Load (0.5ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/views/lists/index.html.erb:13
+  [1m[36mActiveStorage::Attachment Load (0.6ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "List"], ["name", "photo"], ["LIMIT", 1]]
+  ↳ app/views/lists/index.html.erb:16
+  Rendered lists/index.html.erb within layouts/application (Duration: 8.3ms | Allocations: 2972)
+  Rendered layout layouts/application.html.erb (Duration: 8.4ms | Allocations: 3052)
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 1.0ms | Allocations: 3282)
+
+
+  
+ActionView::Template::Error (nil is not a valid asset source):
+    13:     <% @lists.each do |list| %>
+    14:       <div class="co-12 col-sm-6 col-md-4 mb-3">
+    15:         <%= link_to list_path(list), class:"text-decoration-none" do %>
+    16:           <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= cl_image_path list.photo.key, height: 300, crop: :fill %>)">
+    17:             <%= list.name %>
+    18:           </div>
+    19:         <% end %>
+  
+app/views/lists/index.html.erb:16
+app/views/lists/index.html.erb:15
+app/views/lists/index.html.erb:13
+Started GET "/" for 127.0.0.1 at 2023-08-18 11:12:17 +0200
+Processing by ListsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering lists/index.html.erb within layouts/application
+  [1m[36mList Load (0.5ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/views/lists/index.html.erb:13
+  [1m[36mActiveStorage::Attachment Load (11.9ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "List"], ["name", "photo"], ["LIMIT", 1]]
+  ↳ app/views/lists/index.html.erb:16
+  Rendered lists/index.html.erb within layouts/application (Duration: 39.5ms | Allocations: 2962)
+  Rendered layout layouts/application.html.erb (Duration: 39.9ms | Allocations: 3041)
+Completed 500 Internal Server Error in 42ms (ActiveRecord: 12.4ms | Allocations: 3264)
+
+
+  
+ActionView::Template::Error (nil is not a valid asset source):
+    13:     <% @lists.each do |list| %>
+    14:       <div class="co-12 col-sm-6 col-md-4 mb-3">
+    15:         <%= link_to list_path(list), class:"text-decoration-none" do %>
+    16:           <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= cl_image_path list.photo.key, height: 300, crop: :fill %>)">
+    17:             <%= list.name %>
+    18:           </div>
+    19:         <% end %>
+  
+app/views/lists/index.html.erb:16
+app/views/lists/index.html.erb:15
+app/views/lists/index.html.erb:13
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (111.6ms)[0m  [1m[35mDROP DATABASE IF EXISTS "rails-watch-list_development"[0m
+  [1m[35m (19.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS "rails-watch-list_test"[0m
+  [1m[35m (88.1ms)[0m  [1m[35mCREATE DATABASE "rails-watch-list_development" ENCODING = 'unicode'[0m
+  [1m[35m (48.6ms)[0m  [1m[35mCREATE DATABASE "rails-watch-list_test" ENCODING = 'unicode'[0m
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5664623546625577800)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateMovies (20220421072200)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "movies" ("id" bigserial primary key, "title" character varying, "overview" text, "poster_url" character varying, "rating" float, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220421072200"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateLists (20220421072341)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE TABLE "lists" ("id" bigserial primary key, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220421072341"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBookmarks (20220421072643)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "bookmarks" ("id" bigserial primary key, "comment" text, "movie_id" bigint NOT NULL, "list_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_630f44bd39"
+FOREIGN KEY ("movie_id")
+  REFERENCES "movies" ("id")
+, CONSTRAINT "fk_rails_29c05dc16c"
+FOREIGN KEY ("list_id")
+  REFERENCES "lists" ("id")
+)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_bookmarks_on_movie_id" ON "bookmarks" ("movie_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_bookmarks_on_list_id" ON "bookmarks" ("list_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220421072643"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateReviews (20220421075255)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.0ms)[0m  [1m[35mCREATE TABLE "reviews" ("id" bigserial primary key, "comment" text, "rating" integer, "list_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_4a5c24a6bd"
+FOREIGN KEY ("list_id")
+  REFERENCES "lists" ("id")
+)[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE INDEX "index_reviews_on_list_id" ON "reviews" ("list_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220421075255"]]
+  [1m[36mTRANSACTION (6.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateActiveStorageTables (20230818064859)
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (12.1ms)[0m  [1m[35mCREATE TABLE "active_storage_blobs" ("id" bigserial primary key, "key" character varying NOT NULL, "filename" character varying NOT NULL, "content_type" character varying, "metadata" text, "service_name" character varying NOT NULL, "byte_size" bigint NOT NULL, "checksum" character varying, "created_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_blobs_on_key" ON "active_storage_blobs" ("key")[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" bigserial primary key, "name" character varying NOT NULL, "record_type" character varying NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_c3b3935057"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (4.2ms)[0m  [1m[35mCREATE INDEX "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments" ("blob_id")[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_attachments_uniqueness" ON "active_storage_attachments" ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "active_storage_variant_records" ("id" bigserial primary key, "blob_id" bigint NOT NULL, "variation_digest" character varying NOT NULL, CONSTRAINT "fk_rails_993965df05"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_variant_records_uniqueness" ON "active_storage_variant_records" ("blob_id", "variation_digest")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230818064859"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2023-08-18 09:12:30.254446"], ["updated_at", "2023-08-18 09:12:30.254446"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5664623546625577800)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 127.0.0.1 at 2023-08-18 11:12:40 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ListsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering lists/index.html.erb within layouts/application
+  [1m[36mList Load (1.4ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/views/lists/index.html.erb:13
+  Rendered lists/index.html.erb within layouts/application (Duration: 2.3ms | Allocations: 1469)
+  Rendered shared/_navbar.html.erb (Duration: 0.5ms | Allocations: 443)
+  Rendered shared/_flashes.html.erb (Duration: 0.2ms | Allocations: 223)
+  Rendered layout layouts/application.html.erb (Duration: 6.1ms | Allocations: 3946)
+Completed 200 OK in 16ms (Views: 6.2ms | ActiveRecord: 1.4ms | Allocations: 11847)
+
+
+Started GET "/lists/new" for 127.0.0.1 at 2023-08-18 11:12:41 +0200
+Processing by ListsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering lists/new.html.erb within layouts/application
+  Rendered lists/new.html.erb within layouts/application (Duration: 22.7ms | Allocations: 13102)
+  Rendered shared/_navbar.html.erb (Duration: 0.1ms | Allocations: 185)
+  Rendered shared/_flashes.html.erb (Duration: 0.0ms | Allocations: 31)
+  Rendered layout layouts/application.html.erb (Duration: 23.5ms | Allocations: 13867)
+Completed 200 OK in 52ms (Views: 21.0ms | ActiveRecord: 21.3ms | Allocations: 17586)
+
+
+Started POST "/lists" for 127.0.0.1 at 2023-08-18 11:12:49 +0200
+Processing by ListsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "list"=>{"name"=>"Hey", "photo"=>#<ActionDispatch::Http::UploadedFile:0x000000010b2eb8f8 @tempfile=#<Tempfile:/var/folders/n7/6h7pl_9j6xqgp7hgjjhp_2n00000gn/T/RackMultipart20230818-10327-tdswd5.svg>, @content_type="image/svg+xml", @original_filename="OSZI-logo.svg", @headers="Content-Disposition: form-data; name=\"list[photo]\"; filename=\"OSZI-logo.svg\"\r\nContent-Type: image/svg+xml\r\n">}, "commit"=>"Create List"}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/lists_controller.rb:19:in `create'
+  [1m[36mList Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "lists" WHERE "lists"."name" = $1 LIMIT $2[0m  [["name", "Hey"], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:19:in `create'
+  [1m[36mList Create (1.5ms)[0m  [1m[32mINSERT INTO "lists" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Hey"], ["created_at", "2023-08-18 09:12:49.862053"], ["updated_at", "2023-08-18 09:12:49.862053"]]
+  ↳ app/controllers/lists_controller.rb:19:in `create'
+  [1m[36mActiveStorage::Blob Load (2.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" INNER JOIN "active_storage_attachments" ON "active_storage_blobs"."id" = "active_storage_attachments"."blob_id" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "List"], ["name", "photo"], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:19:in `create'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "List"], ["name", "photo"], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:19:in `create'
+  [1m[36mActiveStorage::Blob Create (0.7ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["key", "qyanx0k4w6u0k7k9bguamwc222az"], ["filename", "OSZI-logo.svg"], ["content_type", "image/svg+xml"], ["metadata", "{\"identified\":true}"], ["service_name", "cloudinary"], ["byte_size", 1459], ["checksum", "9/MujgEbX4soFE62F3DYaA=="], ["created_at", "2023-08-18 09:12:49.880604"]]
+  ↳ app/controllers/lists_controller.rb:19:in `create'
+  [1m[36mActiveStorage::Attachment Create (1.0ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "photo"], ["record_type", "List"], ["record_id", 1], ["blob_id", 1], ["created_at", "2023-08-18 09:12:49.882319"]]
+  ↳ app/controllers/lists_controller.rb:19:in `create'
+  [1m[36mList Update (0.2ms)[0m  [1m[33mUPDATE "lists" SET "updated_at" = $1 WHERE "lists"."id" = $2[0m  [["updated_at", "2023-08-18 09:12:49.883978"], ["id", 1]]
+  ↳ app/controllers/lists_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/lists_controller.rb:19:in `create'
+[36m  Cloudinary Storage (1680.2ms) [0m[32mUploaded file to key: qyanx0k4w6u0k7k9bguamwc222az (checksum: 9/MujgEbX4soFE62F3DYaA==)[0m
+[ActiveJob] Enqueued ActiveStorage::AnalyzeJob (Job ID: 3881a881-0a5d-4042-8fb7-b2fecaaf495b) to Async(default) with arguments: #<GlobalID:0x000000010bb577d0 @uri=#<URI::GID gid://rails-watch-list/ActiveStorage::Blob/1>>
+Redirected to http://127.0.0.1:3000/lists/1
+Completed 302 Found in 1756ms (ActiveRecord: 13.8ms | Allocations: 184242)
+
+
+[ActiveJob] [ActiveStorage::AnalyzeJob] [3881a881-0a5d-4042-8fb7-b2fecaaf495b]   [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [3881a881-0a5d-4042-8fb7-b2fecaaf495b] Performing ActiveStorage::AnalyzeJob (Job ID: 3881a881-0a5d-4042-8fb7-b2fecaaf495b) from Async(default) enqueued at 2023-08-18T09:12:51Z with arguments: #<GlobalID:0x000000010bb7c738 @uri=#<URI::GID gid://rails-watch-list/ActiveStorage::Blob/1>>
+[ActiveJob] [ActiveStorage::AnalyzeJob] [3881a881-0a5d-4042-8fb7-b2fecaaf495b] Skipping image analysis because the ruby-vips gem isn't installed
+[ActiveJob] [ActiveStorage::AnalyzeJob] [3881a881-0a5d-4042-8fb7-b2fecaaf495b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [3881a881-0a5d-4042-8fb7-b2fecaaf495b]   [1m[36mActiveStorage::Blob Update (0.4ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = $1 WHERE "active_storage_blobs"."id" = $2[0m  [["metadata", "{\"identified\":true,\"analyzed\":true}"], ["id", 1]]
+Started GET "/lists/1" for 127.0.0.1 at 2023-08-18 11:12:51 +0200
+[ActiveJob] [ActiveStorage::AnalyzeJob] [3881a881-0a5d-4042-8fb7-b2fecaaf495b]   [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [3881a881-0a5d-4042-8fb7-b2fecaaf495b] Performed ActiveStorage::AnalyzeJob (Job ID: 3881a881-0a5d-4042-8fb7-b2fecaaf495b) from Async(default) in 15.92ms
+Processing by ListsController#show as TURBO_STREAM
+  Parameters: {"id"=>"1"}
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:34:in `set_list'
+  Rendering layout layouts/application.html.erb
+  Rendering lists/show.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "List"], ["name", "photo"], ["LIMIT", 1]]
+  ↳ app/views/lists/show.html.erb:2
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/lists/show.html.erb:2
+  [1m[36mMovie Count (2.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "movies" INNER JOIN "bookmarks" ON "movies"."id" = "bookmarks"."movie_id" WHERE "bookmarks"."list_id" = $1[0m  [["list_id", 1]]
+  ↳ app/views/lists/show.html.erb:5
+  [1m[36mReview Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reviews" WHERE "reviews"."list_id" = $1 LIMIT $2[0m  [["list_id", 1], ["LIMIT", 1]]
+  ↳ app/views/lists/show.html.erb:41
+  [1m[36mReview Load (3.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."list_id" = $1[0m  [["list_id", 1]]
+  ↳ app/views/lists/show.html.erb:44
+  [1m[36mMovie Load (0.3ms)[0m  [1m[34mSELECT "movies".* FROM "movies" ORDER BY "movies"."title" ASC[0m
+  ↳ app/views/bookmarks/_modal.html.erb:12
+  Rendered bookmarks/_modal.html.erb (Duration: 2.9ms | Allocations: 2813)
+  Rendered lists/show.html.erb within layouts/application (Duration: 39.1ms | Allocations: 18067)
+  Rendered shared/_navbar.html.erb (Duration: 0.1ms | Allocations: 177)
+  Rendered shared/_flashes.html.erb (Duration: 0.0ms | Allocations: 31)
+  Rendered layout layouts/application.html.erb (Duration: 39.6ms | Allocations: 18779)
+Completed 200 OK in 59ms (Views: 26.1ms | ActiveRecord: 21.4ms | Allocations: 28523)
+
+
+Started GET "/" for 127.0.0.1 at 2023-08-18 11:12:54 +0200
+Processing by ListsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering lists/index.html.erb within layouts/application
+  [1m[36mList Load (1.0ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/views/lists/index.html.erb:13
+  [1m[36mActiveStorage::Attachment Load (13.8ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "List"], ["name", "photo"], ["LIMIT", 1]]
+  ↳ app/views/lists/index.html.erb:16
+  [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/lists/index.html.erb:16
+  Rendered lists/index.html.erb within layouts/application (Duration: 28.5ms | Allocations: 2657)
+  Rendered shared/_navbar.html.erb (Duration: 0.1ms | Allocations: 173)
+  Rendered shared/_flashes.html.erb (Duration: 0.0ms | Allocations: 24)
+  Rendered layout layouts/application.html.erb (Duration: 30.5ms | Allocations: 3807)
+Completed 200 OK in 40ms (Views: 17.4ms | ActiveRecord: 15.1ms | Allocations: 4095)
+
+
+Started GET "/" for 127.0.0.1 at 2023-08-18 11:12:56 +0200
+Processing by ListsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering lists/index.html.erb within layouts/application
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/views/lists/index.html.erb:13
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "List"], ["name", "photo"], ["LIMIT", 1]]
+  ↳ app/views/lists/index.html.erb:16
+  [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/lists/index.html.erb:16
+  Rendered lists/index.html.erb within layouts/application (Duration: 8.4ms | Allocations: 2489)
+  Rendered shared/_navbar.html.erb (Duration: 0.3ms | Allocations: 173)
+  Rendered shared/_flashes.html.erb (Duration: 0.1ms | Allocations: 24)
+  Rendered layout layouts/application.html.erb (Duration: 10.2ms | Allocations: 3643)
+Completed 200 OK in 12ms (Views: 10.3ms | ActiveRecord: 1.1ms | Allocations: 3898)
+
+
+Started GET "/" for 127.0.0.1 at 2023-08-18 11:14:19 +0200
+Processing by ListsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering lists/index.html.erb within layouts/application
+  [1m[36mList Load (0.7ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/views/lists/index.html.erb:13
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "List"], ["name", "photo"], ["LIMIT", 1]]
+  ↳ app/views/lists/index.html.erb:16
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/lists/index.html.erb:16
+  Rendered lists/index.html.erb within layouts/application (Duration: 12.8ms | Allocations: 2480)
+  Rendered shared/_navbar.html.erb (Duration: 0.3ms | Allocations: 173)
+  Rendered shared/_flashes.html.erb (Duration: 0.4ms | Allocations: 24)
+  Rendered layout layouts/application.html.erb (Duration: 21.9ms | Allocations: 3624)
+Completed 200 OK in 27ms (Views: 21.9ms | ActiveRecord: 1.4ms | Allocations: 3872)
+
+
